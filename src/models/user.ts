@@ -1,8 +1,9 @@
 import { Column, Entity, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate } from 'typeorm'
 import bcrypt from 'bcryptjs'
 import { v4 as uuid} from 'uuid'
+const env = require('../main/config/env')
 
-@Entity('users')
+@Entity(env.table_to_users)
 class User {
   @PrimaryGeneratedColumn('uuid')
   id: string

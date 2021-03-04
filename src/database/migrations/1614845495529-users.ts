@@ -1,11 +1,12 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
+const env = require(`../../main/config/env`)
 
 export class users1614845495529 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: 'users',
+                name: env.table_to_users,
                 columns: [
                     {
                             name: 'id',
