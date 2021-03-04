@@ -1,3 +1,4 @@
+import * as EmailValidator from 'email-validator';
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import User from '../models/user'
@@ -15,6 +16,10 @@ class UsersController {
   async save(req: Request, res: Response) {
 
     const { nome, email, password } = req.body
+
+    const isValidMail = EmailValidator.validate(email)
+
+    if(!isValidMail) return res.status(400).json({ error: 'This is an invalid email'})
 
     const userRepository = getRepository(User)
 
@@ -35,6 +40,10 @@ class UsersController {
 
   async auth(req: Request, res: Response) {
     const { email, password } = req.body
+
+    const isValidMail = EmailValidator.validate(email)
+
+    if(!isValidMail) return res.status(400).json({ error: 'This is an invalid email'})
 
     const userRepository = getRepository(User)
 
