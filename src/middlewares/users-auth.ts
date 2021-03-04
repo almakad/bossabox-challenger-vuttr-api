@@ -6,8 +6,6 @@ const env = require('../main/config/env')
 export default function userAuthMiddleware(req: Request, res: Response, next: NextFunction) {
   const { authorization } = req.query
 
-  console.log(authorization)
-
   if (!authorization) {
     return res.status(401).json({msg: "Unauthorized"})
   }
