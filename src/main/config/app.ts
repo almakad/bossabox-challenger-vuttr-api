@@ -8,6 +8,7 @@ import  createConnection from '../../database/index'
 import { AppError } from '../../errors/AppError';
 
 import setupSwagger from './config-swagger'
+import { cors } from '../../middlewares/cors'
 
 createConnection().then(() => console.log('Connected to database'))
   .catch((error) => console.log(error))
@@ -18,6 +19,8 @@ const app = express();
 setupSwagger(app)
 
 app.use(express.json())
+
+app.use(cors)
 
 app.use('/api', router)
 
