@@ -28,7 +28,6 @@ class Tools {
     const toolsRepository = getRepository(ToolsDb)
 
     const tools = await toolsRepository.find({order: {id: 'ASC'}, skip: 0, take: 30})
-    console.log(tools)
     
     tools.map((tg) => {
       tg.tags = JSON.parse(tg.tags)

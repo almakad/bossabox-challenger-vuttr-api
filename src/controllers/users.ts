@@ -21,13 +21,13 @@ class UsersController {
 
     const isValidMail = EmailValidator.validate(email)
 
-    if(!isValidMail) return res.status(400).json({ error: 'This is an invalid email'})
+    if(!isValidMail) throw new AppError("This is an invalid email", 400)
 
     const userRepository = getRepository(User)
 
     const userExists = await userRepository.findOne({where: { email: email }})
 
-    if(userExists) return res.status(400).json({ error: 'User already exists'})
+    if(userExists) throw new AppError("User already exists", 409)
 
     const user = userRepository.create({ nome, email, password })
     await userRepository.save(user)
@@ -45,7 +45,7 @@ class UsersController {
 
     const isValidMail = EmailValidator.validate(email)
 
-    if(!isValidMail) return res.status(400).json({ error: 'This is an invalid email'})
+    if(!isValidMail) throw new AppError("This is an invalid email", 400)
 
     const userRepository = getRepository(User)
 
@@ -63,7 +63,7 @@ class UsersController {
 
     const token = jwt.sign({ id: user.id }, env.jwtSecret, { expiresIn: '1h', algorithm: "HS256"} )
 
-    return res.redirect(302, 'http://localhost:3000/api/index?authorization=' + token)  //.redirect('http://localhost:3000/api/index')
+    return res.redirect(302, 'http://localhost:3000/api/index?authorization=' + token)
   }
 }
 

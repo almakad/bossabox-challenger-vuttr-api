@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction} from 'express'
 import jwt from 'jsonwebtoken'
+import { AppError } from '../errors/AppError'
 import TokenPayload from './auth-interface'
 const env = require('../main/config/env')
 
@@ -20,6 +21,6 @@ export default function userAuthMiddleware(req: Request, res: Response, next: Ne
     return next()
 
   } catch (error) {
-    return res.status(401).json({msg: "Unauthorized"})
+    throw new AppError("Unauthorized", 401)
   }
 }
