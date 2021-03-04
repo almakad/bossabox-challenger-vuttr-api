@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import User from '../models/user'
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
+const env = require('../main/config/env')
 
 class UsersController {
   async save(req: Request, res: Response) {
@@ -22,7 +25,28 @@ class UsersController {
       email: user.email
 
     })
-    
+  }
+
+  async auth(req: Request, res: Response) {
+    const { email, password } = req.body
+
+    const userRepository = getRepository(User)
+
+    const user = await userRepository.findOne({where: { email: email }})
+
+    if(!user) return res.status(400).json({ error: 'User not found'})
+
+    const hashedPassword = bcrypt.compare(password, user.password)
+
+    if(!hashedPassword) return res.status(401).json({msg: "Unauthorized"})
+
+    const token = jwt.sign({ id: user.id }, env.jwtSecret, { expiresIn: '1h', algorithm: "HS256"} )
+
+    const users = {
+      id: user.id,
+      token
+    }
+    return res.json(users)
   }
 }
 

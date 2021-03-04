@@ -16,16 +16,22 @@ router.get('/check', (req: Request, res: Response) => {
   })
 })
 
+// Route to save a new tool
+router.post('/tools', tools.save)
+
 
 router.get('/tools/:tag', tools.searchByTag)
 router.get('/tools/id/:id', tools.searchById)
 router.get('/tools', tools.listTools)
 
 
+// Route to delete a tool by id
 router.post('/tools/id/:id', tools.delete)
-router.post('/tools', tools.save)
 
+
+// Registration route
 router.post('/sign_in', usersController.save)
+router.post('/sign_up', usersController.auth)
 
 
 
