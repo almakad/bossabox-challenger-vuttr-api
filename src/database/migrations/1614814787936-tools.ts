@@ -10,6 +10,8 @@ export class tools1614814787936 implements MigrationInterface {
           {
             name: 'id',
             type: 'int',
+            isGenerated: true,
+            generationStrategy: 'increment',
             isPrimary: true
           },{
             name: 'title',
@@ -21,7 +23,7 @@ export class tools1614814787936 implements MigrationInterface {
             name: 'description',
             type: 'mediumtext'
           },{
-            name: 'title',
+            name: 'tags',
             type: 'mediumtext'
           }
 
@@ -31,6 +33,7 @@ export class tools1614814787936 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropTable('tools');
   }
 
 }

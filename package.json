@@ -10,7 +10,7 @@
     "typeorm": "ts-node-dev node_modules/typeorm/cli.js",
     "up": "yarn typeorm migration:run",
     "revert": "yarn typeorm migration:revert",
-    "drop": "yarn typeorm schema:drop"
+    "drop:migration": "yarn typeorm schema:drop"
   },
   "devDependencies": {
     "@types/express": "^4.17.11",
