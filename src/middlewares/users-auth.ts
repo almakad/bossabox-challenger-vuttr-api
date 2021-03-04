@@ -4,13 +4,15 @@ import TokenPayload from './auth-interface'
 const env = require('../main/config/env')
 
 export default function userAuthMiddleware(req: Request, res: Response, next: NextFunction) {
-  const { authorization } = req.headers
+  const { authorization } = req.query
+
+  console.log(authorization)
 
   if (!authorization) {
     return res.status(401).json({msg: "Unauthorized"})
   }
 
-  const token = authorization.replace('Bearer', '').trim()
+  const token = authorization.toString().replace('Bearer', '').trim()
 
   try {
     const data = jwt.verify(token, env.jwtSecret) 

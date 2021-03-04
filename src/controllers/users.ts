@@ -57,11 +57,7 @@ class UsersController {
 
     const token = jwt.sign({ id: user.id }, env.jwtSecret, { expiresIn: '1h', algorithm: "HS256"} )
 
-    const users = {
-      id: user.id,
-      token
-    }
-    return res.json(users)
+    return res.redirect(302, 'http://localhost:3000/api/index?authorization=' + token)  //.redirect('http://localhost:3000/api/index')
   }
 }
 
