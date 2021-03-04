@@ -3,6 +3,8 @@ import { Router, Request, Response } from 'express'
 import { Tools } from '../../controllers/tools'
 import { UsersController } from '../../controllers/users'
 
+import userAuthMiddleware from '../../middlewares/users-auth'
+
 
 
 const router = Router()
@@ -34,5 +36,6 @@ router.post('/sign_in', usersController.save)
 router.post('/sign_up', usersController.auth)
 
 
+router.get('/index', userAuthMiddleware, usersController.index)
 
 export { router }

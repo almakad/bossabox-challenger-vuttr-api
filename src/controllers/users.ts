@@ -6,6 +6,12 @@ import jwt from 'jsonwebtoken'
 const env = require('../main/config/env')
 
 class UsersController {
+
+  index(req: Request, res: Response) {
+    return res.json({
+      access_granted: req.userId})
+  }
+
   async save(req: Request, res: Response) {
 
     const { nome, email, password } = req.body
