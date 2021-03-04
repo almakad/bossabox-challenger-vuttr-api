@@ -20,7 +20,7 @@ setupSwagger(app)
 
 app.use(express.json())
 
-app.use(cors)
+// app.use(cors)
 
 app.use('/api', router)
 

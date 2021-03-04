@@ -32,8 +32,8 @@ router.post('/tools/id/:id', tools.delete)
 
 
 // Registration route
-router.post('/sign_up', usersController.save)
-router.post('/sign_in', usersController.auth)
+router.post('/signup', usersController.save)
+router.post('/login', usersController.auth)
 
 
 router.get('/index', userAuthMiddleware, usersController.index)

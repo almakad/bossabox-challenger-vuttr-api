@@ -10,9 +10,10 @@ const env = require('../main/config/env')
 class UsersController {
 
   index(req: Request, res: Response) {
+
+    const authorization = req.originalUrl.split('=')[1]
     return res.json({
-      redirec: "Successfuly redirected",
-      access_granted: req.userId})
+      accessToken: authorization})
   }
 
   async save(req: Request, res: Response) {
