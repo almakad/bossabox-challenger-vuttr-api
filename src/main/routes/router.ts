@@ -12,6 +12,15 @@ router.get('/check', (req: Request, res: Response) => {
   })
 })
 
+
+router.get('/tools/:tag', tools.searchByTag)
+router.get('/tools/id/:id', tools.searchById)
+router.get('/tools', tools.listTools)
+
+
+router.post('/tools/id/:id', tools.delete)
 router.post('/tools', tools.save)
+
+
 
 export { router }
