@@ -19,20 +19,20 @@ router.get('/check', (req: Request, res: Response) => {
 })
 
 // Route to save a new tool
-router.post('/tools', tools.save)
+router.post('/tools', userAuthMiddleware, tools.save)
 
 
-router.get('/tools/:tag', tools.searchByTag)
-router.get('/tools/id/:id', tools.searchById)
-router.get('/tools', tools.listTools)
+router.get('/tools/:tag', userAuthMiddleware, tools.searchByTag)
+router.get('/tools/id/:id', userAuthMiddleware, tools.searchById)
+router.get('/tools', userAuthMiddleware, tools.listTools)
 
 
 // Route to delete a tool by id
-router.post('/tools/id/:id', tools.delete)
+router.post('/tools/id/:id', userAuthMiddleware, tools.delete)
 
 
 // Registration route
-router.post('/signup', usersController.save)
+router.post('/signup', usersController.store)
 router.post('/login', usersController.auth)
 
 

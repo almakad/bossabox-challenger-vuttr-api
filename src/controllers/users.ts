@@ -13,10 +13,11 @@ class UsersController {
 
     const authorization = req.originalUrl.split('=')[1]
     return res.json({
+      id: req.userId,
       accessToken: authorization})
   }
 
-  async save(req: Request, res: Response) {
+  async store(req: Request, res: Response) {
 
     const { nome, email, password } = req.body
 
@@ -64,7 +65,14 @@ class UsersController {
 
     const token = jwt.sign({ id: user.id }, env.jwtSecret, { expiresIn: '1h', algorithm: "HS256"} )
 
-    return res.redirect(302, 'http://localhost:3000/api/index?authorization=' + token)
+    return res.status(200).json({
+      user: {
+        id: user.id,
+        email: user.email,
+        nome: user.nome
+      },      
+      token
+    }) // redirect(302, 'http://localhost:3000/api/index?authorization=' + token)
   }
 }
 

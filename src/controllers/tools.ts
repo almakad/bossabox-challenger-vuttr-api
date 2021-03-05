@@ -1,11 +1,18 @@
 import { Request, Response } from "express";
 import { getRepository, Like } from "typeorm";
+import { AppError } from "../errors/AppError";
 import { ToolsDb } from "../models/tools";
 
 
 class Tools {
   async save(req: Request, res: Response) {
     var { title, link, description, tags } = req.body;
+
+    // const { authorization } = req.headers
+    // console.log(authorization)
+
+    // if(!authorization) throw new AppError('Unauthorized, please authenticate your user', 401)
+    
 
     const toolsRepository = getRepository(ToolsDb)
 
@@ -19,6 +26,7 @@ class Tools {
     const tool = toolsRepository.create({ title, link, description, tags })
     await toolsRepository.save(tool)
 
+    tool.tags = JSON.parse(tags)
     return res.status(201).json({
       tool
     })
