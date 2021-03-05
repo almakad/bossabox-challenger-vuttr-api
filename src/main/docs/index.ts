@@ -1,9 +1,6 @@
 import { loginPath } from '../docs/paths/login-path'
-import { accountSchema } from '../docs/schemas/account-schema'
-import { loginParamsSchema } from '../docs/schemas/login-params-schema'
-import { signUpPath } from './paths/signup-path'
-import { signUpParamsSchema } from './schemas/signup-schema'
-
+import { badRequest, serverError, unauthorized, notFound } from './components'
+import { accountSchema, errorSchema, loginParamsSchema } from './schemas'
 export default {
   openapi: '3.0.0',
   info: {
@@ -11,22 +8,34 @@ export default {
     description: 'To save tools in database',
     version: '1.0.0'
   },
+  licence: {
+    name: 'GPL3.0-or-later',
+    url: 'https://spdx.org/licenses/GPL-3.0-or-later.html'
+  },
+  contact: {
+    name: 'Carlos Rodrigues',
+    email: 'carls-f@live.com',
+    url: 'https://github.com/almakad/bossabox-challenger-vuttr-api'
+  },
   servers: [{
     url: '/api'
   }],
   tags: [{
     name: 'Login'
-  },{
-    name: 'SignUp'
   }
 ],
   paths: {
     '/login': loginPath,
-    '/signup': signUpPath
   },
   schemas: {
     account: accountSchema,
     loginParams: loginParamsSchema,
-    signupParams: signUpParamsSchema
+    error: errorSchema
+  },
+  components: {
+    badRequest,
+    serverError,
+    unauthorized,
+    notFound
   }
 }

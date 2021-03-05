@@ -4,7 +4,7 @@
   "description": "backend-api",
   "main": "server.js",
   "author": "Carlos Rodrigues",
-  "license": "MIT",
+  "license": "GPL3.0-or-later",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules ./src/main/config/server.ts",
     "typeorm": "ts-node-dev node_modules/typeorm/cli.js",
