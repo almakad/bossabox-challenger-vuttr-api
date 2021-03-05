@@ -1,6 +1,6 @@
-import { loginPath, signUpPath } from './paths'
-import { accountSchema, errorSchema, loginParamsSchema, signUpParamsSchema } from './schemas'
-import { badRequest, serverError, unauthorized, notFound } from './components'
+import { loginPath, signUpPath, toolsPath } from './paths'
+import { accountSchema, errorSchema, loginParamsSchema, signUpParamsSchema, tagsSchemas, toolSchema, toolsSchema, bearerSchema} from './schemas'
+import { badRequest, serverError, unauthorized, notFound, forbidden } from './components'
 
 export default {
   openapi: '3.0.0',
@@ -23,22 +23,35 @@ export default {
   }],
   tags: [{
     name: 'Login'
+  },
+  {
+    name: 'Tools'
+  
   }
 ],
   paths: {
     '/login': loginPath,
-    '/signup': signUpPath
+    '/signup': signUpPath,
+    '/tools': toolsPath
   },
   schemas: {
+    error: errorSchema,
     account: accountSchema,
     loginParams: loginParamsSchema,
     signupParams: signUpParamsSchema,
-    error: errorSchema
+    toolsSchema: toolsSchema,
+    toolSchema: toolSchema,
+    tag: tagsSchemas
+
   },
   components: {
+    securitySchemes: {
+      bearerAuth: bearerSchema
+    },
     badRequest,
     serverError,
     unauthorized,
-    notFound
+    notFound,
+    forbidden
   }
 }

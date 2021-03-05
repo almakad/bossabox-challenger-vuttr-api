@@ -21,7 +21,6 @@ router.get('/check', (req: Request, res: Response) => {
 // Route to save a new tool
 router.post('/tools', userAuthMiddleware, tools.save)
 
-
 router.get('/tools/:tag', userAuthMiddleware, tools.searchByTag)
 router.get('/tools/id/:id', userAuthMiddleware, tools.searchById)
 router.get('/tools', userAuthMiddleware, tools.listTools)
